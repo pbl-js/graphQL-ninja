@@ -1,8 +1,17 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
+const mongoose = require("mongoose");
 
 const app = express();
+
+mongoose
+  .connect(
+    "mongodb+srv://pawel123:pawel123@cluster0.tm6sw.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((err) => console.log("Error: ", err.message));
 
 app.use(
   "/graphql",
